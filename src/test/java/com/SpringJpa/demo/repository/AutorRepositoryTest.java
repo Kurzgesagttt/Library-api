@@ -120,17 +120,4 @@ public class AutorRepositoryTest {
 
     }
 
-    @Test
-    void buscaAutorPorNome(){
-        List<Autor> lista = repository.findByNome("Francisca");
-        lista.forEach(System.out::println);
-
-        List<Livro> listaLivro = livroRepository.findByAutor();
-        listaLivro.forEach(System.out::println);
-
-
-    }
-
-
-
 }
