@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/autores")
@@ -20,10 +23,19 @@ public class AutorController {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody AutorDTO autor){
+    public ResponseEntity<Void> salvar(@RequestBody AutorDTO autor){
         Autor autorEntidade = autor.mapearAutor();
         service.salvarAutor(autorEntidade);
-        return new ResponseEntity("Autor salvo com sucesso! "+autor, HttpStatus.CREATED);
+
+
+        //retorna o ID da entidade criada na url para o padrao rest
+        URI location =  ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(autorEntidade.getId())
+                .toUri();
+
+
+        return ResponseEntity.created(location).build();
 
     }
 }
