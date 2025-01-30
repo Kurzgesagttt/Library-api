@@ -69,7 +69,7 @@ public class AutorController {
         }
 
         service.deletar(autorOptional.get());
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
 
     }
 }
