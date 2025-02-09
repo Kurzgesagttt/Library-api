@@ -78,6 +78,7 @@ public class AutorController {
     public ResponseEntity<List<AutorDTO>> pesquisar(@RequestParam(value = "nome",required = false) String nome
             ,@RequestParam(value = "nacionalidade",required = false) String nacionalidade) {
 
+        //TODO
     }
 
 }
