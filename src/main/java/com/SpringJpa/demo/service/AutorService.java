@@ -34,7 +34,7 @@ public class AutorService {
             return autorRepository.findByNomeAndNacionalidade(nome,nacionalidade);
         }
         if(nome != null){
-            return autorRepository.findByNome(nome);
+            return autorRepository.findByNomeQuery(nome);
         }
         if(nacionalidade != null){
             return autorRepository.findByNacionalidade(nacionalidade);
