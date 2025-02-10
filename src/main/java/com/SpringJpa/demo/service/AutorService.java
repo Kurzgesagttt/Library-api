@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,6 +27,19 @@ public class AutorService {
 
     public void deletar(Autor autor){
         autorRepository.delete(autor);
+    }
+
+    public List<Autor> pesquisa(String nome, String nacionalidade){
+        if(nome != null && nacionalidade != null){
+            return autorRepository.findByNomeAndNacionalidade(nome,nacionalidade);
+        }
+        if(nome != null){
+            return autorRepository.findByNome(nome);
+        }
+        if(nacionalidade != null){
+            return autorRepository.findByNacionalidade(nacionalidade);
+        }
+        return autorRepository.findAll();
     }
 
 }
