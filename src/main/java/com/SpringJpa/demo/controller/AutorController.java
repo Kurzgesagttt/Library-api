@@ -86,4 +86,9 @@ public class AutorController {
         return ResponseEntity.ok(lista);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Void> atualizar(@PathVariable  String id,@RequestBody AutorDTO dto){
+
+    }
+
 }
