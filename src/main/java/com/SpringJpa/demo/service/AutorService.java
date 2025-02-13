@@ -21,6 +21,13 @@ public class AutorService {
         return autorRepository.save(autor);
     }
 
+    public void atualizarAutor(Autor autor){
+        if(autor.getId() ==null){
+            throw new IllegalArgumentException("Para atualizar é necessario o autor já esteja cadastrado");
+        }
+        autorRepository.save(autor);
+    }
+
     public Optional<Autor> obterPorId(UUID id){
         return autorRepository.findById(id);
     }
