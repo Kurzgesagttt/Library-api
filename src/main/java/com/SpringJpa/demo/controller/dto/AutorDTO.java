@@ -1,4 +1,4 @@
-package com.SpringJpa.demo.dto;
+package com.SpringJpa.demo.controller.dto;
 
 import com.SpringJpa.demo.model.Autor;
 

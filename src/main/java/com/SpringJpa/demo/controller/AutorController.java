@@ -1,11 +1,9 @@
 package com.SpringJpa.demo.controller;
 
-import com.SpringJpa.demo.dto.AutorDTO;
+import com.SpringJpa.demo.controller.dto.AutorDTO;
+import com.SpringJpa.demo.controller.dto.ErroResposta;
 import com.SpringJpa.demo.model.Autor;
-import com.SpringJpa.demo.repository.AutorRepository;
 import com.SpringJpa.demo.service.AutorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -38,6 +36,7 @@ public class AutorController {
                 .buildAndExpand(autorEntidade.getId())
                 .toUri();
 
+        
 
         return ResponseEntity.created(location).build();
 
