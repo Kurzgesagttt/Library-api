@@ -2,14 +2,17 @@ package com.SpringJpa.demo.controller;
 
 import com.SpringJpa.demo.controller.dto.AutorDTO;
 import com.SpringJpa.demo.controller.dto.ErroResposta;
+import com.SpringJpa.demo.exceptions.RegistroDuplicadoException;
 import com.SpringJpa.demo.model.Autor;
 import com.SpringJpa.demo.service.AutorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -20,25 +23,30 @@ public class AutorController {
 
     private final AutorService service;
 
-    public AutorController(AutorService service){
+    public AutorController(AutorService service) {
         this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvar(@RequestBody AutorDTO autor){
-        Autor autorEntidade = autor.mapearAutor();
-        service.salvarAutor(autorEntidade);
+    public ResponseEntity<?> salvar(@RequestBody AutorDTO autor) {
+        try {
+            Autor autorEntidade = autor.mapearAutor();
+            service.salvarAutor(autorEntidade);
 
 
-        //retorna o ID da entidade criada na url para o padrao rest
-        URI location =  ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(autorEntidade.getId())
-                .toUri();
+            //retorna o ID da entidade criada na url para o padrao rest
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(autorEntidade.getId())
+                    .toUri();
 
-        
+            return ResponseEntity.created(location).build();
 
-        return ResponseEntity.created(location).build();
+        } catch (RegistroDuplicadoException e) {
+            var erroDTO = ErroResposta.conflito(e.getMessage());
+            return ResponseEntity.status(erroDTO.status()).body(erroDTO);
+        }
+
 
     }
 
@@ -85,23 +93,29 @@ public class AutorController {
         return ResponseEntity.ok(lista);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable String id,@RequestBody AutorDTO dto){
-        var idAutor = UUID.fromString(id);
+        try {
+            var idAutor = UUID.fromString(id);
 
-        Optional<Autor> encontrado = service.obterPorId(idAutor);
-        if(encontrado.isEmpty()){
-            return ResponseEntity.notFound().build();
+            Optional<Autor> encontrado = service.obterPorId(idAutor);
+            if(encontrado.isEmpty()){
+                return ResponseEntity.notFound().build();
+            }
+
+            var autor = encontrado.get();
+
+            autor.setNome(dto.nome());
+            autor.setNacionalidade(dto.nacionalidade());
+            autor.setDataNascimento(dto.dataNascimento());
+
+            service.atualizarAutor(autor);
+            return ResponseEntity.noContent().build();
+
+        }catch(RegistroDuplicadoException e){
+
         }
 
-        var autor = encontrado.get();
-
-        autor.setNome(dto.nome());
-        autor.setNacionalidade(dto.nacionalidade());
-        autor.setDataNascimento(dto.dataNascimento());
-
-        service.atualizarAutor(autor);
-        return ResponseEntity.noContent().build();
     }
 
 }

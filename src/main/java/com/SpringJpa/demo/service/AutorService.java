@@ -2,6 +2,7 @@ package com.SpringJpa.demo.service;
 
 import com.SpringJpa.demo.model.Autor;
 import com.SpringJpa.demo.repository.AutorRepository;
+import com.SpringJpa.demo.validator.AutorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,19 @@ import java.util.UUID;
 @Service
 public class AutorService {
 
-    @Autowired
-    AutorRepository autorRepository;
+
+    private final AutorRepository autorRepository;
+
+    private final AutorValidator validator;
+
+
+    public AutorService(AutorRepository autorRepository, AutorValidator validator) {
+        this.autorRepository = autorRepository;
+        this.validator = validator;
+    }
 
     public Autor salvarAutor(Autor autor){
+        validator.validar(autor);
         return autorRepository.save(autor);
     }
 
@@ -23,6 +33,7 @@ public class AutorService {
         if(autor.getId() ==null){
             throw new IllegalArgumentException("Para atualizar é necessario o autor já esteja cadastrado");
         }
+        validator.validar(autor);
         autorRepository.save(autor);
     }
 

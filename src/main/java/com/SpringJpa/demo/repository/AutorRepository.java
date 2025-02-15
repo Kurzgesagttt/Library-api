@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface AutorRepository extends JpaRepository<Autor, UUID> {
@@ -16,5 +18,11 @@ public interface AutorRepository extends JpaRepository<Autor, UUID> {
 
     @Query("select a from Autor a where a.nome like CONCAT('%', :nome, '%')")
     List<Autor> findByNomeQuery(@Param("nome") String nome);
+
+    Optional<Autor> findByNomeAndDataNascimentoAndNacionalidade(
+            String nome, LocalDate dataNascimento, String nacionalidade
+    );
+
+
 
 }
