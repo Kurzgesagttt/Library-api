@@ -94,7 +94,7 @@ public class AutorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizar(@PathVariable String id,@RequestBody AutorDTO dto){
+    public ResponseEntity<?> atualizar(@PathVariable String id,@RequestBody AutorDTO dto){
         try {
             var idAutor = UUID.fromString(id);
 
@@ -102,7 +102,6 @@ public class AutorController {
             if(encontrado.isEmpty()){
                 return ResponseEntity.notFound().build();
             }
-
             var autor = encontrado.get();
 
             autor.setNome(dto.nome());
@@ -113,9 +112,9 @@ public class AutorController {
             return ResponseEntity.noContent().build();
 
         }catch(RegistroDuplicadoException e){
-
+            var erroDTO = ErroResposta.conflito(e.getMessage());
+            return ResponseEntity.status(erroDTO.status()).body(erroDTO);
         }
-
     }
 
 }

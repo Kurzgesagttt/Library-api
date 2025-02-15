@@ -31,7 +31,8 @@ public class AutorValidator {
             return autorEncontrado.isPresent();
         }
 
-        return !autor.getId().equals(autorEncontrado.get().getId()) && autorEncontrado.isPresent();
+        return autorEncontrado.isPresent() && !autor.getId().equals(autorEncontrado.get().getId());
+
     }
 
 

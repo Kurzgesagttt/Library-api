@@ -30,7 +30,7 @@ public class AutorService {
     }
 
     public void atualizarAutor(Autor autor){
-        if(autor.getId() ==null){
+        if(autor.getId() == null){
             throw new IllegalArgumentException("Para atualizar é necessario o autor já esteja cadastrado");
         }
         validator.validar(autor);
