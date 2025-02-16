@@ -2,6 +2,7 @@ package com.SpringJpa.demo.controller;
 
 import com.SpringJpa.demo.controller.dto.AutorDTO;
 import com.SpringJpa.demo.controller.dto.ErroResposta;
+import com.SpringJpa.demo.exceptions.OperacaoNaoPermitidaException;
 import com.SpringJpa.demo.exceptions.RegistroDuplicadoException;
 import com.SpringJpa.demo.model.Autor;
 import com.SpringJpa.demo.service.AutorService;
@@ -69,16 +70,26 @@ public class AutorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable("id") String id){
-        var idAutor = UUID.fromString(id);
-        Optional<Autor> autorOptional = service.obterPorId(idAutor);
+    public ResponseEntity<?> deletar(@PathVariable("id") String id){
 
-        if(autorOptional.isEmpty()){
-            return ResponseEntity.notFound().build();
+        try{
+            var idAutor = UUID.fromString(id);
+            Optional<Autor> autorOptional = service.obterPorId(idAutor);
+
+            if(autorOptional.isEmpty()){
+                return ResponseEntity.notFound().build();
+            }
+
+            service.deletar(autorOptional.get());
+            return ResponseEntity.noContent().build();
+        }catch (OperacaoNaoPermitidaException e){
+            var erroResposta = ErroResposta.respostaPadrao(e.getMessage());
+            return ResponseEntity.status(erroResposta.status()).body(erroResposta);
         }
 
-        service.deletar(autorOptional.get());
-        return ResponseEntity.noContent().build();
+
+
+
 
     }
 

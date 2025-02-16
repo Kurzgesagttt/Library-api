@@ -32,7 +32,9 @@ public class Autor {
     private String nacionalidade;
 
 
-    @OneToMany(mappedBy = "autor",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "autor"
+            //,cascade = CascadeType.ALL,fetch = FetchType.LAZY
+    )
     private List<Livro> livros;
 
     @CreatedDate
