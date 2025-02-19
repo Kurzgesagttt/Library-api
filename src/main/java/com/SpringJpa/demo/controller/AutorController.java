@@ -6,6 +6,7 @@ import com.SpringJpa.demo.exceptions.OperacaoNaoPermitidaException;
 import com.SpringJpa.demo.exceptions.RegistroDuplicadoException;
 import com.SpringJpa.demo.model.Autor;
 import com.SpringJpa.demo.service.AutorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class AutorController {
     }
 
     @PostMapping
-    public ResponseEntity<?> salvar(@RequestBody AutorDTO autor) {
+    public ResponseEntity<?> salvar(@RequestBody @Valid AutorDTO autor) {
         try {
             Autor autorEntidade = autor.mapearAutor();
             service.salvarAutor(autorEntidade);
@@ -86,11 +87,6 @@ public class AutorController {
             var erroResposta = ErroResposta.respostaPadrao(e.getMessage());
             return ResponseEntity.status(erroResposta.status()).body(erroResposta);
         }
-
-
-
-
-
     }
 
     @GetMapping
