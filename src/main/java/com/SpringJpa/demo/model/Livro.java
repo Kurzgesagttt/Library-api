@@ -1,6 +1,7 @@
 package com.SpringJpa.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.CreatedDate;
@@ -134,5 +135,8 @@ public class Livro {
 
     public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
+    }
+
+    public void setAutor(@NotNull(message = "Campo obrigatorio") UUID idAutor) {
     }
 }
