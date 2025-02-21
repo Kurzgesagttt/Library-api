@@ -17,15 +17,4 @@ public record LivroDTO(@ISBN @NotBlank(message = "Campo obrigatorio") String isb
                        GeneroLivro genero,
                        BigDecimal preco,
                        @NotNull(message = "Campo obrigatorio")  UUID id_autor) {
-
-    public Livro mapearLivro(){
-        Livro livro = new Livro();
-        livro.setIsbn(this.isbn);
-        livro.setTitulo(this.titulo);
-        livro.setDataPublicacao(this.dataPublicacao);
-        livro.setGenero(this.genero);
-        livro.setPreco(this.preco);
-        livro.setAutor(this.id_autor);
-        return livro;
-    }
 }
