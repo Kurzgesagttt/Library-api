@@ -16,5 +16,5 @@ public record LivroDTO(@ISBN @NotBlank(message = "Campo obrigatorio") String isb
                        @Past(message = "A data deve ser válida") LocalDate dataPublicacao,
                        GeneroLivro genero,
                        BigDecimal preco,
-                       @NotNull(message = "Campo obrigatorio")  UUID id_autor) {
+                       @NotNull(message = "Campo obrigatorio")  UUID idAutor) {
 }
