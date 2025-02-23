@@ -18,7 +18,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/livros")
 @RequiredArgsConstructor
-public class LivroController {
+public class LivroController implements GenericController{
 
     private final LivroService service;
     private final LivroMapper mapper;
@@ -28,8 +28,10 @@ public class LivroController {
         try {
             Livro livro = mapper.toEntity(dto);
             service.salvar(livro);
+            var url = gerarHeaderLocation(livro.getId());
 
-            return ResponseEntity.ok(livro);
+            return ResponseEntity.created(url).build();
+
         } catch (RegistroDuplicadoException ex) {
             var erroDTO = ErroResposta.conflito(ex.getMessage());
             return ResponseEntity.status(erroDTO.status()).body(erroDTO);
