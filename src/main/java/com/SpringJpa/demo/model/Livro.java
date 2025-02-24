@@ -138,5 +138,6 @@ public class Livro {
     }
 
     public void setAutor(@NotNull(message = "Campo obrigatorio") UUID idAutor) {
+
     }
 }
