@@ -20,11 +20,4 @@ public record AutorDTO(UUID id,
                        @Size(min = 2, max = 100,message = "Campo fora do tamanho padrao")
                        String nacionalidade) {
 
-    public Autor mapearAutor(){
-        Autor autor = new Autor();
-        autor.setNome(this.nome);
-        autor.setDataNascimento(this.dataNascimento);
-        autor.setNacionalidade(this.nacionalidade);
-        return autor;
-    }
 }

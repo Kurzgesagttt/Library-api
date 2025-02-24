@@ -17,7 +17,8 @@ public class LivroService {
         return repository.save(livro);
     }
 
-    public Livro obterPorId(String id){
-        return repository.findById(UUID.fromString(id)).orElse(null);
+    public Optional<Livro> obterPorId(String id){
+        return repository.findById(UUID.fromString(id));
     }
+
 }
