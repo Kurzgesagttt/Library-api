@@ -42,10 +42,9 @@ public class LivroController implements GenericController{
         }
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<PesquisaLivroDTO> obterDETALHES(@PathVariable("id")String id ){
-        return service.obterPorId(UUID.fromString(id)).map(livro -> {
-            
-        })
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deletaLivro(@PathVariable("id") String id){
+        return service.deleter(UUID.fromString(id));
     }
+
 }

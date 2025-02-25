@@ -13,7 +13,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "autor", schema = "public")
-@ToString
 @EntityListeners(AuditingEntityListener.class)
 public class Autor {
 

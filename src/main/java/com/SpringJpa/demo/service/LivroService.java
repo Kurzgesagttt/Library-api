@@ -17,7 +17,12 @@ public class LivroService {
         return repository.save(livro);
     }
 
-    public Livro obterPorId(String id){
-        return repository.findById(UUID.fromString(id)).orElse(null);
+    public Optional<Livro> obterPorId(UUID id) {
+        return repository.findById(id);
     }
+
+    public void deleter(Livro livro){
+        repository.delete(livro);
+    }
+
 }
