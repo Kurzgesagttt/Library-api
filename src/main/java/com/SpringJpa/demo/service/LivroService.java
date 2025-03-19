@@ -21,7 +21,7 @@ public class LivroService {
         return repository.findById(id);
     }
 
-    public void deleter(Livro livro){
+    public void deletar(Livro livro){
         repository.delete(livro);
     }
 
