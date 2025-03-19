@@ -58,7 +58,7 @@ public class AutorController implements GenericController{
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable("id") String id){
+    public ResponseEntity<Void> deletar(@PathVariable("id") String id){
 
         var idAutor = UUID.fromString(id);
         Optional<Autor> autorOptional = service.obterPorId(idAutor);

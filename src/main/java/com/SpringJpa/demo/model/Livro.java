@@ -137,7 +137,6 @@ public class Livro {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public void setAutor(@NotNull(message = "Campo obrigatorio") UUID idAutor) {
 
-    }
+
 }
