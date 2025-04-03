@@ -2,19 +2,16 @@ package com.SpringJpa.demo.controller;
 
 import com.SpringJpa.demo.controller.dto.ErroResposta;
 import com.SpringJpa.demo.controller.dto.LivroDTO;
-import com.SpringJpa.demo.controller.dto.PesquisaLivroDTO;
-import com.SpringJpa.demo.controller.mappers.LivroMapper;
 import com.SpringJpa.demo.exceptions.RegistroDuplicadoException;
 import com.SpringJpa.demo.model.Livro;
 import com.SpringJpa.demo.service.LivroService;
+import io.github.cursodsousa.libraryapi.controller.mappers.LivroMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -42,20 +39,13 @@ public class LivroController implements GenericController{
         }
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<PesquisaLivroDTO> obterDetalhes(@PathVariable("id") String id) {
-        return service.obterPorId(id)
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> deletar(@PathVariable("id") String id){
+        return service.obterPorId(UUID.fromString(id))
                 .map(livro -> {
-                    System.out.println("Livro encontrado: " + livro);
-                    PesquisaLivroDTO dto = mapper.toDTO(livro);
-                    System.out.println("DTO gerado: " + dto);
-                    return ResponseEntity.ok(dto);
-                })
-                .orElseGet(() -> {
-                    System.out.println("Livro não encontrado para ID: " + id);
-                    return ResponseEntity.notFound().build();
-                });
+                    service.deletar(livro);
+                    return ResponseEntity.noContent().build();
+                }).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
 
 }

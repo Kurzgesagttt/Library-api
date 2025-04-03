@@ -1,4 +1,4 @@
-package io.github.cursodsousa.libraryapi.config;
+package com.SpringJpa.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +17,6 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(configurer -> {
-                    configurer.loginPage("/login").permitAll();
-                })
                 .authorizeHttpRequests(authorize -> {
                     authorize.anyRequest().authenticated();
                 })
