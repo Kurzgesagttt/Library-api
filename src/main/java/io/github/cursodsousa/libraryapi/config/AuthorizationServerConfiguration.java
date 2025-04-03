@@ -115,7 +115,7 @@ public class AuthorizationServerConfiguration {
                 // revogar
                 .tokenRevocationEndpoint("/oauth2/revoke")
                 // authorization endpoint
-                .authorizationEndpoint("/oauth2/authorize")
+                .authorizationEndpoint("/oauth2/authorized")
                 // informacoes do usuario OPEN ID CONNECT
                 .oidcUserInfoEndpoint("/oauth2/iserinfo")
                 // obter a chave publica pra verificar a asstinatura do token
