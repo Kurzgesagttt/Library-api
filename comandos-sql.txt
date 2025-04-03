@@ -48,11 +48,12 @@ insert into usuario(id,login,senha,email,roles)
 values
 (uuid_generate_v4(),
 'gerente',
-'$2a$12$D0cB5b8tmup5DIAcXs7DLeRIFApyA603lX3t4ojWZlCuEz/aBufoa',
+'$2a$10$PPF16ozTUO.9quszUq89JeMLOQbvBt7RyjfEPPhqPFt1zly/rMNHu', --admin123
 'gerente@emai.com','{GERENTE}');
 
-INSERT INTO client(id, client_id,client_secret,redirec_uri, scope)values
-(uuid_generate_v4(), 'client-production','$2a$12$wkF.pniLoho/23FJiD738eUlo3WkOtFnjdk0xbidwHRxGvNjt6LUm',
+INSERT INTO client(id, client_id,client_secret,redirect_uri, scope)
+values
+(uuid_generate_v4(), 'client-production','$2a$10$fL9WW66zJZhn78hb.2FUEuJ3HTIJCYUFIWuZVZcqhVDIXUFcO0kIq',  --client-secret
 'http://localhost:8080/authorized','GERENTE');
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
