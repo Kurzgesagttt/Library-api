@@ -1,4 +1,4 @@
-create table tb_autor(
+create table autor(
   id uuid not null primary key,
   nome varchar(100) not null,
   data_nascimento date not null,
@@ -43,3 +43,16 @@ CREATE TABLE client(
    redirect_uri varchar(200) not null,
    scope varchar(50)
 );
+
+insert into usuario(id,login,senha,email,roles)
+values
+(uuid_generate_v4(),
+'gerente',
+'$2a$12$D0cB5b8tmup5DIAcXs7DLeRIFApyA603lX3t4ojWZlCuEz/aBufoa',
+'gerente@emai.com','{GERENTE}');
+
+INSERT INTO client(id, client_id,client_secret,redirec_uri, scope)values
+(uuid_generate_v4(), 'client-production','$2a$12$wkF.pniLoho/23FJiD738eUlo3WkOtFnjdk0xbidwHRxGvNjt6LUm',
+'http://localhost:8080/authorized','GERENTE');
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
