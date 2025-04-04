@@ -1,6 +1,6 @@
 # 📚 Library API
 
-Este projeto é uma API RESTful desenvolvida com **Spring Boot**, que simula o gerenciamento de uma biblioteca com autenticação via **OAuth2 (Login Social)**, segurança com **Spring Security**, persistência com **Spring Data JPA**, e deploy na nuvem utilizando **Amazon AWS**.
+Este projeto é uma API RESTful desenvolvida com **Spring Boot**, que simula o gerenciamento de uma biblioteca com autenticação via **OAuth2 (Login Social)**, segurança com **Spring Security**, persistência com **Spring Data JPA**, e deploy na nuvem utilizando **docker** e **Amazon AWS**.
 
 Desenvolvido como parte de um curso prático para consolidar conhecimentos em aplicações modernas com o ecossistema Spring.
 
@@ -8,16 +8,16 @@ Desenvolvido como parte de um curso prático para consolidar conhecimentos em ap
 
 ## 🚀 Tecnologias Utilizadas
 
-- Java 17+
+- Java 21
 - Spring Boot
 - Spring Security
-- OAuth2 / Login com Google e GitHub
+- OAuth2 / Login com Google
 - Spring Data JPA
 - Hibernate
-- Banco de Dados (H2, MySQL ou PostgreSQL)
+- Banco de Dados (PostgreSQL)
 - Maven
-- Amazon AWS (EC2, RDS, S3)
-- Docker (opcional)
+- Amazon AWS (EC2, RDS)
+- Docker 
 
 ---
 
