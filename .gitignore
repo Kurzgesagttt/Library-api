@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.comandos-docker.txt
 env.vars
 oauth2.txt
 ### IntelliJ IDEA ###
